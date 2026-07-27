@@ -1,39 +1,1284 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Econovo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Econovo Club | Turning Students Into Problem Solvers</title>
+    <meta name="description" content="Econovo is a university club connecting economics, business, innovation, and practical skills.">
+    
+    <!-- 
+      ==========================================================================
+      PSYCHOLOGICAL TYPOGRAPHY SETUP
+      Fonts: Host Grotesk (Primary) & IBM Plex Sans Arabic (Secondary)
+      Reasoning: Modern, minimal, and academic[span_0](start_span)[span_0](end_span). These fonts have a high x-height, 
+      making them highly readable and reducing cognitive strain for users scanning the page.
+      ========================================================================== 
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 
+          ==========================================================================
+          1. DESIGN TOKENS & CSS VARIABLES (BRAND BOOK DRIVEN)
+          ========================================================================== 
+        */
+        :root {
+            /* Exact Brand Colors[span_1](start_span)[span_1](end_span) */
+            --color-obsidian: #0E2A24;
+            --color-obsidian-dark: #1F1F1F;
+            --color-silver-sage: #8FB8A6;
+            --color-chalk-1: #F4F7F2;
+            --color-chalk-2: #F6F4F0;
+            --color-white: #FFFFFF;
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+            /* Psychological Gradients (Calming, Growth-oriented) */
+            --gradient-primary: linear-gradient(135deg, var(--color-obsidian) 0%, #1a4d42 100%);
+            --gradient-sage: linear-gradient(135deg, var(--color-silver-sage) 0%, #a8c9bb 100%);
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static/font/lucide.css">
+            /* Typography Variables */
+            --font-en: 'Host Grotesk', sans-serif;
+            --font-ar: 'IBM Plex Sans Arabic', sans-serif;
+            
+            /* Fluid Spacing System */
+            --spacing-4: 0.25rem;
+            --spacing-8: 0.5rem;
+            --spacing-16: 1rem;
+            --spacing-24: 1.5rem;
+            --spacing-32: 2rem;
+            --spacing-48: 3rem;
+            --spacing-64: 4rem;
+            --spacing-96: 6rem;
+            --spacing-128: 8rem;
 
-<style>
-:root{
---dark:#0E2A24;
---green:#8FB8A6;
---light:#F6F4EF;
-}
+            /* Shadows */
+            --shadow-sm: 0 4px 6px -1px rgba(14, 42, 36, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(14, 42, 36, 0.08);
+            --shadow-lg: 0 20px 25px -5px rgba(14, 42, 36, 0.1);
+            --shadow-hover: 0 25px 40px -10px rgba(143, 184, 166, 0.25);
 
-*{margin:0;padding:0;box-sizing:border-box}
+            /* Motion & Animation */
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* Border Radii */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 9999px;
+        }
 
-body{
-font-family:Inter,sans-serif;
-background:var(--light);
-color:var(--dark);
-}
+        /* Bilingual Font Application */
+        [lang="en"] { --font-current: var(--font-en); direction: ltr; }
+        [lang="ar"] { --font-current: var(--font-ar); direction: rtl; }
 
-body.ar{
-font-family:Cairo,sans-serif;
-direction:rtl;
-}
+        /* 
+          ==========================================================================
+          2. RESET & BASE STYLES
+          ========================================================================== 
+        */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-header{
-padding:20px;
-display:flex;
-justify-content:space-between;
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-current);
+            background-color: var(--color-chalk-1);
+            color: var(--color-obsidian);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: rgba(14, 42, 36, 0.75);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-fast);
+        }
+
+        ul, ol { list-style: none; }
+        button { border: none; background: none; font-family: inherit; cursor: pointer; }
+
+        /* 
+          ==========================================================================
+          3. UTILITY CLASSES & LAYOUT
+          ========================================================================== 
+        */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-24);
+        }
+
+        .section {
+            padding: var(--spacing-96) 0;
+            position: relative;
+        }
+
+        .text-center { text-align: center; }
+        .mb-16 { margin-bottom: var(--spacing-16); }
+        .mb-32 { margin-bottom: var(--spacing-32); }
+        .mb-64 { margin-bottom: var(--spacing-64); }
+
+        .section-header {
+            max-width: 600px;
+            margin: 0 auto var(--spacing-64);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--color-obsidian);
+            margin-bottom: var(--spacing-16);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-silver-sage);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--spacing-8);
+        }
+
+        /* 
+          ==========================================================================
+          4. COMPONENTS
+          ========================================================================== 
+        */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-8);
+            padding: 16px 32px;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform var(--transition-base);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .btn-primary {
+            background: var(--color-obsidian);
+            color: var(--color-white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(14, 42, 36, 0.3);
+            color: var(--color-white);
+        }
+
+        .btn-secondary {
+            background: var(--color-silver-sage);
+            color: var(--color-obsidian);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--color-silver-sage);
+            color: var(--color-obsidian);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-silver-sage);
+            color: var(--color-white);
+            transform: translateY(-4px);
+        }
+
+        /* 
+          ==========================================================================
+          5. NAVIGATION
+          ========================================================================== 
+        */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: var(--spacing-16) 0;
+            background: rgba(244, 247, 242, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(14, 42, 36, 0.05);
+            z-index: 1000;
+            transition: var(--transition-base);
+        }
+
+        .navbar.scrolled {
+            padding: var(--spacing-8) 0;
+            box-shadow: var(--shadow-sm);
+            background: rgba(244, 247, 242, 0.95);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-16);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-obsidian);
+            cursor: pointer;
+        }
+
+        .logo-img {
+            width: 44px; height: 44px;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-32);
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: var(--color-obsidian);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0; width: 100%; height: 2px;
+            background: var(--color-silver-sage);
+            transform: scaleX(0);
+            transition: var(--transition-base);
+        }
+
+        .nav-link:hover::after { transform: scaleX(1); }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            background: var(--color-chalk-2);
+            border: 1px solid var(--color-silver-sage);
+            font-weight: 700;
+            color: var(--color-obsidian);
+            transition: var(--transition-base);
+        }
+
+        .lang-btn:hover {
+            background: var(--color-silver-sage);
+            color: var(--color-white);
+        }
+
+        /* 
+          ==========================================================================
+          6. HERO SECTION (With Dynamic Floating Elements & Custom Image)
+          ========================================================================== 
+        */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: var(--spacing-96);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-bg-shape {
+            position: absolute;
+            top: -10%; right: -5%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(143,184,166,0.2) 0%, rgba(244,247,242,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 10s infinite alternate;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: var(--spacing-64);
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: var(--spacing-24);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.05;
+        }
+
+        .hero-content p {
+            font-size: clamp(1.125rem, 2vw, 1.35rem);
+            margin-bottom: var(--spacing-32);
+            max-width: 540px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: var(--spacing-16);
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        /* Hero Main Image Container */
+        .hero-img-container {
+            width: 100%;
+            height: 520px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            background: var(--color-chalk-2);
+            border: 2px solid var(--color-silver-sage);
+            transform: rotate(1deg);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* External Dynamic Elements with Permanent Animations */
+        .floating-badge {
+            position: absolute;
+            bottom: 30px; left: -40px;
+            background: var(--color-white);
+            padding: var(--spacing-16) var(--spacing-24);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-16);
+            animation: floatBadge 6s ease-in-out infinite alternate;
+            z-index: 10;
+            border: 1px solid rgba(143, 184, 166, 0.3);
+        }
+
+        .floating-badge .icon-wrap {
+            width: 40px; height: 40px;
+            background: var(--color-chalk-2);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-obsidian);
+        }
+
+        .floating-element-top {
+            position: absolute;
+            top: -25px; right: -20px;
+            background: var(--color-obsidian);
+            color: var(--color-silver-sage);
+            padding: 12px 20px;
+            border-radius: var(--radius-pill);
+            box-shadow: var(--shadow-md);
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: floatElementTop 5s ease-in-out infinite alternate;
+            z-index: 10;
+        }
+
+        .floating-element-side {
+            position: absolute;
+            top: 45%; right: -50px;
+            background: var(--color-white);
+            color: var(--color-obsidian);
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            font-weight: 600;
+            font-size: 0.85rem;
+            animation: floatElementSide 7s ease-in-out infinite alternate;
+            z-index: 10;
+            border-left: 4px solid var(--color-silver-sage);
+        }
+
+        /* 
+          ==========================================================================
+          7. EMPATHY / WELCOME SECTION
+          ========================================================================== 
+        */
+        .empathy-section {
+            padding: var(--spacing-64) var(--spacing-24);
+        }
+
+        .empathy-box {
+            background: var(--color-obsidian);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-64);
+            text-align: center;
+            color: var(--color-chalk-1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .empathy-box h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--color-silver-sage);
+            margin-bottom: var(--spacing-24);
+        }
+
+        .empathy-box p {
+            color: rgba(255,255,255,0.85);
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.25rem;
+        }
+
+        /* 
+          ==========================================================================
+          8. CORE PILLARS
+          ========================================================================== 
+        */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-32);
+        }
+
+        .pillar-card {
+            background: var(--color-white);
+            padding: var(--spacing-48) var(--spacing-32);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition-bounce);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(14, 42, 36, 0.05);
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 0;
+            background: var(--gradient-sage);
+            opacity: 0.1;
+            transition: var(--transition-base);
+            z-index: -1;
+            border-radius: var(--radius-lg);
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-silver-sage);
+        }
+
+        .pillar-card:hover::before { height: 100%; }
+
+        .pillar-icon {
+            width: 72px; height: 72px;
+            background: var(--color-chalk-2);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: var(--spacing-24);
+            color: var(--color-obsidian);
+            transition: var(--transition-base);
+        }
+
+        .pillar-card:hover .pillar-icon {
+            background: var(--color-obsidian);
+            color: var(--color-silver-sage);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .pillar-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: var(--spacing-16);
+        }
+
+        /* 
+          ==========================================================================
+          9. THE JOURNEY (Timeline)
+          ========================================================================== 
+        */
+        .journey-section {
+            background: var(--color-chalk-2);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            width: 2px; height: 100%;
+            background: var(--color-silver-sage);
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-48);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+
+        .timeline-content {
+            width: calc(50% - 40px);
+            background: var(--color-white);
+            padding: var(--spacing-32);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            transition: var(--transition-base);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px; height: 24px;
+            background: var(--color-silver-sage);
+            border: 4px solid var(--color-chalk-2);
+            border-radius: 50%;
+            z-index: 2;
+            transition: var(--transition-bounce);
+        }
+        
+        .timeline-item:hover .timeline-dot {
+            background: var(--color-obsidian);
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+
+        /* 
+          ==========================================================================
+          10. FAQ ACCORDION
+          ========================================================================== 
+        */
+        .faq-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-16);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: var(--transition-base);
+        }
+
+        .faq-item.active { border-color: var(--color-silver-sage); }
+
+        .faq-question {
+            width: 100%;
+            padding: var(--spacing-24);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--color-obsidian);
+            text-align: left;
+        }
+
+        [lang="ar"] .faq-question { text-align: right; }
+
+        .faq-icon { transition: transform var(--transition-base); }
+        .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--color-silver-sage); }
+
+        .faq-answer {
+            padding: 0 var(--spacing-24);
+            max-height: 0;
+            overflow: hidden;
+            transition: all var(--transition-base);
+            opacity: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            padding-bottom: var(--spacing-24);
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        /* 
+          ==========================================================================
+          11. CTA SECTION
+          ========================================================================== 
+        */
+        .cta-section {
+            background: var(--gradient-primary);
+            color: var(--color-white);
+            text-align: center;
+            padding: var(--spacing-128) var(--spacing-24);
+        }
+
+        .cta-section h2 { color: var(--color-white); margin-bottom: var(--spacing-24); }
+        .cta-section p { color: var(--color-silver-sage); margin-bottom: var(--spacing-48); }
+
+        /* 
+          ==========================================================================
+          12. FOOTER & SOCIAL LINKS (With User's Real Links, No Telegram)
+          ========================================================================== 
+        */
+        .footer {
+            background: var(--color-obsidian-dark);
+            color: var(--color-white);
+            padding: var(--spacing-96) 0 var(--spacing-24);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: var(--spacing-64);
+            margin-bottom: var(--spacing-64);
+        }
+
+        .footer-brand h3 {
+            font-size: 2rem;
+            color: var(--color-silver-sage);
+            margin-bottom: var(--spacing-16);
+        }
+
+        .footer-brand p { color: rgba(255,255,255,0.6); max-width: 400px; }
+
+        .footer-title {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-24);
+            color: var(--color-white);
+        }
+
+        .footer-links li { margin-bottom: var(--spacing-16); }
+        .footer-links a { color: rgba(255,255,255,0.6); }
+        .footer-links a:hover { color: var(--color-silver-sage); padding-left: 8px; }
+        [lang="ar"] .footer-links a:hover { padding-left: 0; padding-right: 8px; }
+
+        .social-buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-16);
+            margin-top: var(--spacing-32);
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-16);
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-md);
+            color: var(--color-white);
+            font-weight: 600;
+            transition: var(--transition-base);
+            width: max-content;
+        }
+
+        .social-btn:hover {
+            background: var(--color-silver-sage);
+            color: var(--color-obsidian);
+            border-color: var(--color-silver-sage);
+            transform: translateX(5px);
+        }
+        
+        [lang="ar"] .social-btn:hover { transform: translateX(-5px); }
+
+        .social-btn svg { width: 20px; height: 20px; }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-32);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.4);
+            font-size: 0.875rem;
+        }
+
+        /* 
+          ==========================================================================
+          13. ANIMATIONS
+          ========================================================================== 
+        */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(1deg); }
+            50% { transform: translateY(-12px) rotate(0deg); }
+            100% { transform: translateY(0px) rotate(1deg); }
+        }
+
+        @keyframes floatBadge {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-8px) scale(1.02); }
+        }
+
+        @keyframes floatElementTop {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-10px) rotate(-3deg); }
+        }
+
+        @keyframes floatElementSide {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(12px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        @media (max-width: 992px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-content p { margin: 0 auto var(--spacing-32); }
+            .hero-actions { justify-content: center; }
+            .timeline::before { left: 0; }
+            .timeline-item { flex-direction: column !important; align-items: flex-start; padding-left: var(--spacing-32); }
+            [lang="ar"] .timeline-item { padding-left: 0; padding-right: var(--spacing-32); }
+            .timeline-content { width: 100%; }
+            .timeline-dot { left: 0; }
+            [lang="ar"] .timeline-dot { left: auto; right: 0; }
+            .footer-grid { grid-template-columns: 1fr; gap: var(--spacing-32); }
+            .floating-element-side, .floating-element-top { display: none; /* Hide complex floating badges on small screens */ }
+        }
+
+        @media (max-width: 768px) {
+            :root { --spacing-96: 4rem; --spacing-128: 5rem; }
+            .nav-links { display: none; }
+            .empathy-box { padding: var(--spacing-32) var(--spacing-16); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="brand">
+                <img src="https://i.postimg.cc/vBCdy1F4/copilot-image-1784613842249.png" alt="Econovo Logo" class="logo-img">
+                ECONOVO
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link" id="navAbout">About Us</a></li>
+                <li><a href="#pillars" class="nav-link" id="navPillars">Our Focus</a></li>
+                <li><a href="#journey" class="nav-link" id="navJourney">The Journey</a></li>
+                <li><a href="#faq" class="nav-link" id="navFaq">FAQ</a></li>
+            </ul>
+            <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">العربية</button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-bg-shape"></div>
+        <div class="container hero-grid">
+            <div class="hero-content reveal">
+                <div class="section-subtitle" id="heroTag">University Club • BBA</div>
+                <h1 id="heroTitle">Turning Students Into Problem Solvers.</h1>
+                <p id="heroDesc">We are a university club connecting economics, business, innovation, and practical skills. Join us to bridge the gap between academic theory and real-world application.</p>
+                <div class="hero-actions reveal delay-200">
+                    <a href="https://forms.gle/jZQyPLTBE24zM4oh8" target="_blank" class="btn btn-primary" id="heroBtnJoin">
+                        Become a Member
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#about" class="btn btn-outline" id="heroBtnLearn">Explore Club</a>
+                </div>
+            </div>
+            
+            <div class="hero-visual reveal delay-300">
+                <!-- External Animated Elements -->
+                <div class="floating-element-top">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                    <span>Innovation Lab</span>
+                </div>
+                
+                <div class="floating-element-side">
+                    🚀 Future Entrepreneurs
+                </div>
+
+                <!-- Main Hero Image (Using the provided logo link or visual showcase) -->
+                <div class="hero-img-container">
+                    <img src="https://i.postimg.cc/vBCdy1F4/copilot-image-1784613842249.png" alt="Econovo Showcase">
+                </div>
+                
+                <div class="floating-badge">
+                    <div class="icon-wrap">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <div>
+                        <strong style="display:block; color:var(--color-obsidian);" id="badgeTitle">Practical Skills</strong>
+                        <span style="font-size:0.875rem; color:var(--color-silver-sage);" id="badgeDesc">Real-world impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EMPATHY SECTION -->
+    <section id="about" class="empathy-section reveal">
+        <div class="container">
+            <div class="empathy-box">
+                <h2 id="empathyTitle">You Don't Need to Be an Expert to Start.</h2>
+                <p id="empathyDesc">At Econovo, we understand that entering the world of business and fintech can feel overwhelming. That's why our core value is Growth. Whether you're deeply passionate about finance, or just curious about entrepreneurship, you have a safe space here to learn, fail, and build.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE PILLARS SECTION -->
+    <section id="pillars" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-subtitle" id="pillarsSub">What We Do</div>
+                <h2 class="section-title" id="pillarsTitle">Our Core Focus Areas</h2>
+                <p id="pillarsDesc">Through workshops, projects, and discussions, we help you master these four pillars.</p>
+            </div>
+
+            <div class="pillars-grid">
+                <div class="pillar-card reveal delay-100">
+                    <div class="pillar-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+                    <h3 id="c1Title">Economics</h3>
+                    <p id="c1Desc">Learn beyond the classroom. We dissect how global forces and local markets actually work.</p>
+                </div>
+                
+                <div class="pillar-card reveal delay-200">
+                    <div class="pillar-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+                    <h3 id="c2Title">Business</h3>
+                    <p id="c2Desc">Acquire real management skills. We analyze case studies and build actionable strategies.</p>
+                </div>
+
+                <div class="pillar-card reveal delay-300">
+                    <div class="pillar-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
+                    <h3 id="c3Title">Innovation</h3>
+                    <p id="c3Desc">Transform creative ideas into practical projects. Entrepreneurship is about execution.</p>
+                </div>
+
+                <div class="pillar-card reveal delay-100">
+                    <div class="pillar-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg></div>
+                    <h3 id="c4Title">FinTech</h3>
+                    <p id="c4Desc">Explore the future of finance. Understand block-chain, digital banking, and modern tech.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE JOURNEY -->
+    <section id="journey" class="section journey-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-subtitle" id="journeySub">How It Works</div>
+                <h2 class="section-title" id="journeyTitle">Your Journey With Us</h2>
+                <p id="journeyDesc">A clear path from a curious student to a confident problem solver.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 id="step1Title" class="mb-16">1. Curiosity & Onboarding</h3>
+                        <p id="step1Desc">Attend our welcoming sessions, meet the team, and discover which fields ignite your passion without any pressure.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 id="step2Title" class="mb-16">2. Skill Building Workshops</h3>
+                        <p id="step2Desc">Participate in hands-on workshops led by seniors and experts. No boring lectures, only interactive learning.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 id="step3Title" class="mb-16">3. Collaborative Projects</h3>
+                        <p id="step3Desc">Work in teams to solve real problems. Apply what you've learned in a safe, supportive environment.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 id="step4Title" class="mb-16">4. Becoming a Problem Solver</h3>
+                        <p id="step4Desc">Graduate from a learner to a doer. Build your portfolio, expand your network, and prepare for your career.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-subtitle" id="faqSub">Got Questions?</div>
+                <h2 class="section-title" id="faqTitle">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-wrapper reveal delay-200">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span id="q1">Is the club only for Economics and Business students?</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="a1">Absolutely not! Innovation requires diverse mindsets. Whether you study computer science, engineering, or literature, your unique perspective is valuable here.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span id="q2">What is the time commitment?</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="a2">We respect your academic life. We usually hold 1-2 core sessions per week. You can involve yourself as deeply as your schedule allows.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span id="q3">Are there membership fees?</span>
+                        <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="a3">Our primary activities are free. We believe knowledge should be accessible. Some special external events might have nominal costs, which are always optional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section reveal">
+        <div class="container">
+            <h2 id="ctaTitle" class="section-title">Ready to Transform Your University Experience?</h2>
+            <p id="ctaDesc">Join a community of ambitious students. Let's grow together.</p>
+            <a href="https://forms.gle/jZQyPLTBE24zM4oh8" target="_blank" class="btn btn-secondary" id="ctaBtn">
+                Become a Member Today
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER (With Real Instagram and Facebook Links) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>ECONOVO</h3>
+                    <p id="footerDesc">A university club connecting economics, business, innovation, and practical skills. Turning students into problem solvers.</p>
+                    
+                    <div class="social-buttons-container">
+                        <!-- INSTAGRAM LINK -->
+                        <a href="https://www.instagram.com/econovo.club" target="_blank" class="social-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                            <span id="btnInsta">Follow on Instagram</span>
+                        </a>
+                        
+                        <!-- FACEBOOK LINK -->
+                        <a href="https://www.facebook.com/share/1BmnaFPMX7/" target="_blank" class="social-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                            <span id="btnFb">Like our Facebook Page</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-title" id="footerNavTitle">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about" id="fLink1">About Us</a></li>
+                        <li><a href="#pillars" id="fLink2">Our Focus</a></li>
+                        <li><a href="#journey" id="fLink3">The Journey</a></li>
+                        <li><a href="#faq" id="fLink4">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-title" id="footerContactTitle">Location</h4>
+                    <ul class="footer-links">
+                        <li style="color: rgba(255,255,255,0.6);" id="footerLocStr">University Club</li>
+                        <li style="color: rgba(255,255,255,0.6);">Bordj Bou Arreridj, Algeria</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; <span id="currentYear"></span> Econovo Club. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const allItems = document.querySelectorAll('.faq-item');
+            
+            allItems.forEach(el => {
+                if(el !== item) el.classList.remove('active');
+            });
+            
+            item.classList.toggle('active');
+        }
+
+        const i18n = {
+            en: {
+                langBtn: "العربية",
+                navAbout: "About Us",
+                navPillars: "Our Focus",
+                navJourney: "The Journey",
+                navFaq: "FAQ",
+                heroTag: "University Club • BBA",
+                heroTitle: "Turning Students Into Problem Solvers.",
+                heroDesc: "We are a university club connecting economics, business, innovation, and practical skills. Join us to bridge the gap between academic theory and real-world application.",
+                heroBtnJoin: "Become a Member",
+                heroBtnLearn: "Explore Club",
+                badgeTitle: "Practical Skills",
+                badgeDesc: "Real-world impact",
+                empathyTitle: "You Don't Need to Be an Expert to Start.",
+                empathyDesc: "At Econovo, we understand that entering the world of business and fintech can feel overwhelming. That's why our core value is Growth. Whether you're deeply passionate about finance, or just curious about entrepreneurship, you have a safe space here to learn, fail, and build.",
+                pillarsSub: "What We Do",
+                pillarsTitle: "Our Core Focus Areas",
+                pillarsDesc: "Through workshops, projects, and discussions, we help you master these four pillars.",
+                c1Title: "Economics",
+                c1Desc: "Learn beyond the classroom. We dissect how global forces and local markets actually work.",
+                c2Title: "Business",
+                c2Desc: "Acquire real management skills. We analyze case studies and build actionable strategies.",
+                c3Title: "Innovation",
+                c3Desc: "Transform creative ideas into practical projects. Entrepreneurship is about execution.",
+                c4Title: "FinTech",
+                c4Desc: "Explore the future of finance. Understand block-chain, digital banking, and modern tech.",
+                journeySub: "How It Works",
+                journeyTitle: "Your Journey With Us",
+                journeyDesc: "A clear path from a curious student to a confident problem solver.",
+                step1Title: "1. Curiosity & Onboarding",
+                step1Desc: "Attend our welcoming sessions, meet the team, and discover which fields ignite your passion without any pressure.",
+                step2Title: "2. Skill Building Workshops",
+                step2Desc: "Participate in hands-on workshops led by seniors and experts. No boring lectures, only interactive learning.",
+                step3Title: "3. Collaborative Projects",
+                step3Desc: "Work in teams to solve real problems. Apply what you've learned in a safe, supportive environment.",
+                step4Title: "4. Becoming a Problem Solver",
+                step4Desc: "Graduate from a learner to a doer. Build your portfolio, expand your network, and prepare for your career.",
+                faqSub: "Got Questions?",
+                faqTitle: "Frequently Asked Questions",
+                q1: "Is the club only for Economics and Business students?",
+                a1: "Absolutely not! Innovation requires diverse mindsets. Whether you study computer science, engineering, or literature, your unique perspective is valuable here.",
+                q2: "What is the time commitment?",
+                a2: "We respect your academic life. We usually hold 1-2 core sessions per week. You can involve yourself as deeply as your schedule allows.",
+                q3: "Are there membership fees?",
+                a3: "Our primary activities are free. We believe knowledge should be accessible. Some special external events might have nominal costs, which are always optional.",
+                ctaTitle: "Ready to Transform Your University Experience?",
+                ctaDesc: "Join a community of ambitious students. Let's grow together.",
+                ctaBtn: "Become a Member Today",
+                footerDesc: "A university club connecting economics, business, innovation, and practical skills. Turning students into problem solvers.",
+                btnInsta: "Follow on Instagram",
+                btnFb: "Like our Facebook Page",
+                footerNavTitle: "Quick Links",
+                fLink1: "About Us",
+                fLink2: "Our Focus",
+                fLink3: "The Journey",
+                fLink4: "FAQ",
+                footerContactTitle: "Location",
+                footerLocStr: "University Club"
+            },
+            ar: {
+                langBtn: "English",
+                navAbout: "من نحن",
+                navPillars: "مجالاتنا",
+                navJourney: "الرحلة",
+                navFaq: "الأسئلة",
+                heroTag: "نادي جامعي • برج بوعريريج",
+                heroTitle: "نحو جيل يـحوّل المعرفة إلى حلول.",
+                heroDesc: "نحن نادي جامعي يربط بين الاقتصاد، إدارة الأعمال، الابتكار، والمهارات العملية. انضم إلينا لسد الفجوة بين النظرية الأكاديمية والتطبيق الواقعي.",
+                heroBtnJoin: "انضم إلينا الآن",
+                heroBtnLearn: "اكتشف النادي",
+                badgeTitle: "مهارات عملية",
+                badgeDesc: "تأثير في العالم الواقعي",
+                empathyTitle: "لست بحاجة لتكون خبيراً لتبدأ.",
+                empathyDesc: "في إيكونوفو، ندرك أن دخول عالم الأعمال والتكنولوجيا المالية قد يبدو مربكاً. لهذا السبب، قيمتنا الأساسية هي 'النمو'. سواء كان لديك شغف بالمالية أو مجرد فضول حول ريادة الأعمال، لديك هنا مساحة آمنة للتعلم، المحاولة، والبناء.",
+                pillarsSub: "ماذا نفعل",
+                pillarsTitle: "مجالات تركيزنا الأساسية",
+                pillarsDesc: "من خلال ورش العمل، المشاريع، والنقاشات، نساعدك على إتقان هذه الركائز الأربع.",
+                c1Title: "الاقتصاد",
+                c1Desc: "تعلم أبعد من قاعة الدراسة. نفكك كيف تعمل القوى العالمية والأسواق المحلية حقاً.",
+                c2Title: "إدارة الأعمال",
+                c2Desc: "اكتسب مهارات إدارية حقيقية. نحلل دراسات الحالة ونبني استراتيجيات قابلة للتنفيذ.",
+                c3Title: "الابتكار",
+                c3Desc: "حوّل أفكارك الإبداعية إلى مشاريع عملية. ريادة الأعمال تعتمد على التنفيذ.",
+                c4Title: "التكنولوجيا المالية",
+                c4Desc: "استكشف مستقبل المال. افهم البلوك تشين، البنوك الرقمية، والتقنيات الحديثة.",
+                journeySub: "كيف نعمل",
+                journeyTitle: "رحلتك معنا",
+                journeyDesc: "مسار واضح من طالب فضولي إلى صانع حلول واثق.",
+                step1Title: "1. الفضول والانضمام",
+                step1Desc: "احضر جلساتنا الترحيبية، تعرف على الفريق، واكتشف المجالات التي تثير شغفك دون أي ضغوط.",
+                step2Title: "2. ورش بناء المهارات",
+                step2Desc: "شارك في ورش عمل تطبيقية يقودها زملاء وخبراء. لا محاضرات مملة، بل تعلم تفاعلي فقط.",
+                step3Title: "3. المشاريع التعاونية",
+                step3Desc: "اعمل ضمن فرق لحل مشاكل حقيقية. طبق ما تعلمته في بيئة آمنة وداعمة.",
+                step4Title: "4. صناعة الحلول",
+                step4Desc: "انتقل من مرحلة التعلم إلى التنفيذ. ابنِ معرض أعمالك، وسّع شبكة علاقاتك، واستعد لمسيرتك المهنية.",
+                faqSub: "لديك أسئلة؟",
+                faqTitle: "الأسئلة الشائعة",
+                q1: "هل النادي مخصص لطلاب الاقتصاد والأعمال فقط؟",
+                a1: "إطلاقاً! الابتكار يتطلب عقليات متنوعة. سواء كنت تدرس الإعلام الآلي، الهندسة، أو الأدب، فإن منظورك الفريد قيم جداً هنا.",
+                q2: "ما هو حجم الالتزام بالوقت؟",
+                a2: "نحن نحترم حياتك الأكاديمية. نعقد عادة جلسة أو جلستين أساسيتين أسبوعياً. يمكنك المشاركة بالقدر الذي يسمح به جدولك.",
+                q3: "هل هناك رسوم للانضمام؟",
+                a3: "أنشطتنا الأساسية مجانية. نحن نؤمن بأن المعرفة يجب أن تكون متاحة. قد تكون لبعض الفعاليات الخارجية الخاصة رسوم رمزية، وتكون دائماً اختيارية.",
+                ctaTitle: "هل أنت مستعد لتحويل تجربتك الجامعية؟",
+                ctaDesc: "انضم إلى مجتمع من الطلاب الطموحين. دعنا ننمو معاً.",
+                ctaBtn: "أصبح عضواً اليوم",
+                footerDesc: "نادي جامعي يربط بين الاقتصاد، إدارة الأعمال، الابتكار، والمهارات العملية. نحو جيل يحول المعرفة إلى حلول.",
+                btnInsta: "تابعنا على إنستغرام",
+                btnFb: "سجل إعجابك بصفحتنا على فيسبوك",
+                footerNavTitle: "روابط سريعة",
+                fLink1: "من نحن",
+                fLink2: "مجالاتنا",
+                fLink3: "الرحلة",
+                fLink4: "الأسئلة",
+                footerContactTitle: "الموقع",
+                footerLocStr: "نادي جامعي"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            document.documentElement.lang = currentLang;
+            
+            const content = i18n[currentLang];
+            
+            document.body.style.opacity = '0';
+            
+            setTimeout(() => {
+                for (let key in content) {
+                    const el = document.getElementById(key);
+                    if (el) {
+                        if(el.tagName === 'A' && el.querySelector('svg')) {
+                            const span = el.querySelector('span');
+                            if(span) {
+                                span.innerText = content[key];
+                            } else {
+                                if(el.id === 'heroBtnJoin') {
+                                    el.innerHTML = `${content[key]} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+                                } else {
+                                    el.innerText = content[key];
+                                }
+                            }
+                        } else {
+                            el.innerText = content[key];
+                        }
+                    }
+                }
+                document.body.style.opacity = '1';
+                
+                revealElements.forEach(el => {
+                    el.classList.remove('active');
+                    setTimeout(() => {
+                        const rect = el.getBoundingClientRect();
+                        if (rect.top < window.innerHeight) {
+                            el.classList.add('active');
+                        }
+                    }, 100);
+                });
+            }, 300);
+        }
+    </script>
+</body>
+</html>
 align-items:center;
 }
 
