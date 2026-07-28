@@ -3,11 +3,21 @@
    ========================================================================== */
 
 /* ---- Hero ---- */
-.hero { min-height: 100vh; display: flex; align-items: center; padding-top: var(--sp-96); overflow: hidden; position: relative; }
+.hero {
+    min-height: 100vh; display: flex; align-items: center; padding-top: var(--sp-96); overflow: hidden; position: relative;
+    background-image: radial-gradient(color-mix(in srgb, var(--color-sage) 35%, transparent) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: center top;
+}
 .hero-bg-shape {
     position: absolute; top: -10%; right: -5%; width: 600px; height: 600px;
     background: radial-gradient(circle, color-mix(in srgb, var(--color-sage) 20%, transparent) 0%, transparent 70%);
     border-radius: 50%; z-index: -1;
+}
+.hero-bg-shape::after {
+    content: ''; position: absolute; bottom: -40%; left: -20%; width: 420px; height: 420px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--color-sage) 16%, transparent) 0%, transparent 70%);
+    border-radius: 50%;
 }
 .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--sp-64); align-items: center; }
 .hero-content h1 {
@@ -85,7 +95,23 @@
 .faq-wrapper { max-width: 800px; margin: 0 auto; }
 
 /* ---- CTA ---- */
-.cta-section { background: var(--gradient-primary); color: #fff; text-align: center; padding: var(--sp-128) var(--sp-24); border-radius: var(--r-lg); margin: 0 var(--sp-24); }
+.cta-section {
+    background: var(--gradient-primary); color: #fff; text-align: center; padding: var(--sp-128) var(--sp-24);
+    border-radius: var(--r-lg); margin: 0 var(--sp-24); position: relative; overflow: hidden;
+}
+.cta-section::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(color-mix(in srgb, var(--color-sage) 22%, transparent) 1px, transparent 1px);
+    background-size: 26px 26px;
+}
+.cta-section > * { position: relative; z-index: 1; }
+.empathy-box { position: relative; overflow: hidden; }
+.empathy-box::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(color-mix(in srgb, var(--color-sage) 22%, transparent) 1px, transparent 1px);
+    background-size: 26px 26px;
+}
+.empathy-box > * { position: relative; z-index: 1; }
 .cta-section .section-title { color: #fff; }
 .cta-section p { color: var(--color-sage); margin-bottom: var(--sp-48); font-size: 1.2rem; }
 

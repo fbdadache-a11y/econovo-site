@@ -169,49 +169,5 @@
 [lang="ar"] .mobile-menu.open { left: 0; }
 .mobile-menu .nav-link { font-size: 1.1rem; padding: var(--sp-8) 0; display: block; }
 .mobile-menu-close { align-self: flex-end; }
-
-.hub-grid{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-
-gap:28px;
-
-margin-top:48px;
-
-}
-
-.hub-card{
-
-padding:32px;
-
-text-align:left;
-
-}
-
-.hub-card i{
-
-width:42px;
-
-height:42px;
-
-margin-bottom:18px;
-
-color:var(--accent);
-
-}
-
-.hub-card h3{
-
-margin-bottom:14px;
-
-}
-
-.hub-card p{
-
-opacity:.8;
-
-line-height:1.7;
-
-}
+.mobile-menu-utility { display: flex; align-items: center; gap: var(--sp-16); padding-bottom: var(--sp-16); border-bottom: 1px solid var(--line); }
+.mobile-menu-utility .lang-btn { flex: 1; text-align: center; }

@@ -2,20 +2,6 @@
    ECONOVO — responsive.css
    ========================================================================== */
 
-/* Lighter blur on phones — real backdrop-filter blur is real GPU cost, and
-   with the navbar + mobile menu + several badges all blurring at once, a
-   smaller radius keeps scrolling smooth on mid-range Android hardware. */
-@media (max-width: 768px) {
-    :root { --sp-96: 3.5rem; --sp-128: 4.5rem; --glass-blur: 14px; --glass-blur-sm: 10px; }
-    .nav-links { display: none; }
-    .nav-toggle { display: inline-flex; }
-    .mobile-join { display: block; }
-    body { padding-bottom: 90px; } /* room for the floating join bar */
-    .cta-section .mobile-join-spacer { display: none; }
-    .floating-badge { left: 12px; bottom: 16px; padding: var(--sp-12) var(--sp-16); }
-    .cta-section { margin: 0 var(--sp-16); padding: var(--sp-64) var(--sp-16); }
-}
-
 @media (max-width: 992px) {
     .hero-grid { grid-template-columns: 1fr; text-align: center; }
     .hero-content p { margin: 0 auto var(--sp-32); }
@@ -31,7 +17,7 @@
     .stats-row { grid-template-columns: repeat(2, 1fr); }
     .stat-cell:nth-child(2) { border-right: none; }
     [lang="ar"] .stat-cell:nth-child(2) { border-left: none; }
-    .stat-cell:nth-child(3), .stat-cell:nth-child(4) { border-top: 1px solid var(--glass-border); }
+    .stat-cell:nth-child(3), .stat-cell:nth-child(4) { border-top: 1px solid var(--line); }
     .floating-tag { display: none; }
 }
 
@@ -44,6 +30,20 @@
     .cta-section .mobile-join-spacer { display: none; }
     .floating-badge { left: 12px; bottom: 16px; padding: var(--sp-12) var(--sp-16); }
     .cta-section { margin: 0 var(--sp-16); padding: var(--sp-64) var(--sp-16); }
+
+    /* Top bar was overflowing on phones (logo + theme + lang + Join Now +
+       hamburger never fit on one line, so "Join Now" got clipped off-screen).
+       Keep only the essentials in the fixed bar; theme/lang moved to the
+       slide-menu (see .mobile-menu-utility) where they're still reachable. */
+    .nav-actions .icon-btn.js-theme-toggle,
+    .nav-actions .lang-btn.js-lang-toggle { display: none; }
+    .nav-actions { gap: var(--sp-8); }
+    .brand span { font-size: 1.05rem; }
+    .nav-actions .btn-sm { padding: 10px 16px; font-size: .85rem; white-space: nowrap; }
+
+    /* The navbar can still be taller than expected on some devices — give
+       the hero enough clearance so its top badge never sits behind it. */
+    .hero { padding-top: calc(var(--sp-96) + 56px); min-height: auto; padding-bottom: var(--sp-64); }
 }
 
 @media (max-width: 480px) {
