@@ -48,10 +48,10 @@
                 <li><a href="#faq" class="nav-link" data-i18n="nav.faq">FAQ</a></li>
             </ul>
             <div class="nav-actions">
-                <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">
-                    <i id="themeToggleIcon" data-lucide="moon"></i>
+                <button class="icon-btn js-theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="js-theme-icon" id="themeToggleIcon" data-lucide="moon"></i>
                 </button>
-                <button class="lang-btn" id="langBtn">العربية</button>
+                <button class="lang-btn js-lang-toggle" id="langBtn">العربية</button>
                 <a href="https://forms.gle/jZQyPLTBE24zM4oh8" target="_blank" class="btn btn-primary btn-sm" data-i18n="nav.join">Join Now</a>
                 <button class="icon-btn nav-toggle" id="navToggle" aria-label="Open menu">
                     <i data-lucide="menu"></i>
@@ -64,6 +64,12 @@
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
     <aside class="mobile-menu" id="mobileMenu">
         <button class="icon-btn mobile-menu-close" id="mobileMenuClose" aria-label="Close menu"><i data-lucide="x"></i></button>
+        <div class="mobile-menu-utility">
+            <button class="icon-btn js-theme-toggle" aria-label="Toggle dark mode">
+                <i class="js-theme-icon" data-lucide="moon"></i>
+            </button>
+            <button class="lang-btn js-lang-toggle">العربية</button>
+        </div>
         <ul>
             <li><a href="#about" class="nav-link" data-i18n="nav.about">About Us</a></li>
             <li><a href="#pillars" class="nav-link" data-i18n="nav.pillars">Our Focus</a></li>
@@ -130,17 +136,7 @@
             <div class="stats-row" id="statsRow"></div>
         </div>
     </section>
-<section id="hubs" class="section hubs">
-    <div class="container">
-        <div class="section-heading">
-            <span class="eyebrow" data-i18n="hubs.eyebrow"></span>
-            <h2 data-i18n="hubs.title"></h2>
-            <p data-i18n="hubs.description"></p>
-        </div>
 
-        <div class="hub-grid" id="hubGrid"></div>
-    </div>
-</section>
     <!-- ABOUT / EMPATHY -->
     <section id="about" class="empathy-section section reveal">
         <div class="container">
