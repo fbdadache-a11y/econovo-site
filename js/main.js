@@ -88,25 +88,26 @@
     }
 
     function initThemeToggle() {
-        const btn = document.getElementById('themeToggle');
+        const btns = document.querySelectorAll('.js-theme-toggle');
         const root = document.documentElement;
         const stored = localStorage.getItem('econovo-theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const initial = stored || (prefersDark ? 'dark' : 'light');
         applyTheme(initial);
 
-        if (!btn) return;
-        btn.addEventListener('click', () => {
+        if (!btns.length) return;
+        btns.forEach(btn => btn.addEventListener('click', () => {
             const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             applyTheme(next);
             localStorage.setItem('econovo-theme', next);
-        });
+        }));
 
         function applyTheme(theme) {
             if (theme === 'dark') root.setAttribute('data-theme', 'dark');
             else root.removeAttribute('data-theme');
-            const icon = document.getElementById('themeToggleIcon');
-            if (icon) icon.setAttribute('data-lucide', theme === 'dark' ? 'sun' : 'moon');
+            document.querySelectorAll('.js-theme-icon').forEach(icon => {
+                icon.setAttribute('data-lucide', theme === 'dark' ? 'sun' : 'moon');
+            });
             if (window.lucide) window.lucide.createIcons();
             const meta = document.getElementById('themeColorMeta');
             if (meta) meta.setAttribute('content', theme === 'dark' ? '#1F1F1F' : '#F4F7F2');

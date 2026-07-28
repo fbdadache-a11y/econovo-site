@@ -16,11 +16,10 @@
         const lang = stored || 'en';
         await setLanguage(lang, /*animate*/ false);
 
-        const btn = document.getElementById('langBtn');
-        if (btn) btn.addEventListener('click', async () => {
+        document.querySelectorAll('.js-lang-toggle').forEach(btn => btn.addEventListener('click', async () => {
             const current = document.documentElement.getAttribute('lang') || 'en';
             await setLanguage(current === 'en' ? 'ar' : 'en', true);
-        });
+        }));
     });
 
     async function loadContent(lang) {
@@ -44,8 +43,9 @@
         setMeta('og:title', content.meta.title, true);
         setMeta('og:description', content.meta.description, true);
 
-        const langBtn = document.getElementById('langBtn');
-        if (langBtn) langBtn.textContent = lang === 'en' ? 'العربية' : 'English';
+        document.querySelectorAll('.js-lang-toggle').forEach(langBtn => {
+            langBtn.textContent = lang === 'en' ? 'العربية' : 'English';
+        });
 
         const doRender = () => {
             renderStaticText(content);
@@ -63,18 +63,7 @@
 
         localStorage.setItem('econovo-lang', lang);
     }
-const hubGrid = document.getElementById("hubGrid");
 
-hubGrid.innerHTML = content.hubs.items.map(hub => `
-<div class="glass-card hub-card reveal">
-    <i data-lucide="${hub.icon}"></i>
-    <h3>${hub.title}</h3>
-    <p>${hub.description}</p>
-</div>
-`).join("");
-
-lucide.createIcons();
-   
     function setMeta(name, value, isProperty) {
         const attr = isProperty ? 'property' : 'name';
         let el = document.querySelector(`meta[${attr}="${name}"]`);
