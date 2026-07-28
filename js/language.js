@@ -63,7 +63,18 @@
 
         localStorage.setItem('econovo-lang', lang);
     }
+const hubGrid = document.getElementById("hubGrid");
 
+hubGrid.innerHTML = content.hubs.items.map(hub => `
+<div class="glass-card hub-card reveal">
+    <i data-lucide="${hub.icon}"></i>
+    <h3>${hub.title}</h3>
+    <p>${hub.description}</p>
+</div>
+`).join("");
+
+lucide.createIcons();
+   
     function setMeta(name, value, isProperty) {
         const attr = isProperty ? 'property' : 'name';
         let el = document.querySelector(`meta[${attr}="${name}"]`);
