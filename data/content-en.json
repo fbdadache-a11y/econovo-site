@@ -60,6 +60,28 @@
       { "icon": "wallet", "title": "FinTech", "desc": "Explore the future of finance. Understand blockchain, digital banking, and modern tech." }
     ]
   },
+  "hubs": {
+  "eyebrow": "Our Structure",
+  "title": "Find Your Hub",
+  "description": "Every member contributes through one of our three hubs, each focused on a different part of the club.",
+  "items": [
+    {
+      "icon": "graduation-cap",
+      "title": "Academic Hub",
+      "description": "Develops workshops, educational content, discussions, and research that turn theory into practical knowledge."
+    },
+    {
+      "icon": "palette",
+      "title": "Creative Hub",
+      "description": "Creates visual content, manages branding, social media, photography, and storytelling across the club."
+    },
+    {
+      "icon": "briefcase-business",
+      "title": "Operations Hub",
+      "description": "Coordinates events, partnerships, logistics, administration, and keeps every activity running smoothly."
+    }
+  ]
+  }
   "journey": {
     "eyebrow": "How It Works",
     "title": "Your Journey With Us",
