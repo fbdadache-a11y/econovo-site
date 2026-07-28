@@ -22,7 +22,7 @@
     --bg: var(--color-chalk-1);
     --bg-raised: var(--color-white);
     --bg-sunken: var(--color-chalk-2);
-    js/animations.js--text: var(--color-ink);
+    --text: var(--color-ink);
     --text-soft: var(--color-ink-soft);
     --line: var(--color-line);
     --brand-dark: var(--color-obsidian);

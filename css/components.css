@@ -44,13 +44,6 @@
 .btn-outline:hover { background: var(--color-sage); color: var(--color-obsidian); transform: translateY(-3px); }
 .btn-sm { padding: 10px 20px; font-size: .9rem; }
 
-/* ---- Scroll progress (thin ledger line tracking read position) ---- */
-.scroll-progress {
-    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-    background: var(--color-sage); z-index: 1100; transition: width .1s linear;
-}
-[lang="ar"] .scroll-progress { left: auto; right: 0; }
-
 /* ---- Navbar ---- */
 .navbar {
     position: fixed; top: 0; left: 0; width: 100%; padding: var(--sp-16) 0;
@@ -133,8 +126,8 @@
 [lang="ar"] .faq-question { text-align: right; }
 .faq-icon { flex-shrink: 0; transition: transform var(--t-base); }
 .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--color-sage); }
-.faq-answer { padding: 0 var(--sp-24); height: 0; overflow: hidden; opacity: 0; transition: opacity var(--t-base), padding-bottom var(--t-base); }
-.faq-item.active .faq-answer { padding-bottom: var(--sp-24); opacity: 1; height: 500px; } /* no-JS fallback only — faq.js drives the real height */
+.faq-answer { padding: 0 var(--sp-24); max-height: 0; overflow: hidden; transition: all var(--t-base); opacity: 0; }
+.faq-item.active .faq-answer { padding-bottom: var(--sp-24); max-height: 320px; opacity: 1; }
 
 /* ---- Status pill (events) ---- */
 .pill { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700; padding: 5px 12px; border-radius: var(--r-pill); }
@@ -144,14 +137,10 @@
 
 /* ---- Mobile bottom join button ---- */
 .mobile-join {
-    display: none; position: fixed; left: 50%; z-index: 1200; width: calc(100% - 40px); max-width: 360px;
-    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-    transform: translateX(-50%) translateY(0);
-    transition: transform var(--t-base), opacity var(--t-base);
-    opacity: 1;
+    display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 1200; width: calc(100% - 40px); max-width: 360px;
 }
-.mobile-join.is-hidden { transform: translateX(-50%) translateY(140%); opacity: 0; pointer-events: none; }
-.mobile-join .btn { width: 100%; box-shadow: var(--shadow-lg); }
+.mobile-join .btn { width: 100%; }
 
 /* ---- Mobile side menu ---- */
 .mobile-menu-overlay {
