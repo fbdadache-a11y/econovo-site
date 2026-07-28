@@ -76,10 +76,10 @@
     "title": "Meet the Team",
     "desc": "A small student board keeping things running \u2014 more roles open every semester.",
     "members": [
-      { "role": "President", "name": "\u2014 Add Name \u2014" },
-      { "role": "Vice President", "name": "\u2014 Add Name \u2014" },
-      { "role": "Treasurer", "name": "\u2014 Add Name \u2014" },
-      { "role": "Creative Lead", "name": "\u2014 Add Name \u2014" }
+      { "role": "President", "name": "Dadache Fouad" },
+      { "role": "Vice President", "name": "Houssem Yettou" },
+      { "role": "Team Lead", "name": "Abdelilah" },
+      { "role": "Team Lead", "name": "Rahal Akram El Mokhtar" }
     ]
   },
   "events": {
