@@ -109,17 +109,19 @@
 
     function renderTrust(trust) {
         const label = document.getElementById('trustLabel');
-        const wrap = document.getElementById('trustItems');
+        const track = document.getElementById('trustTrack');
         if (label) label.textContent = trust.label;
-        if (wrap) wrap.innerHTML = trust.items.map(i => `<span class="trust-item">${i}</span>`).join('');
+        if (!track) return;
+        const set = trust.items.map(i => `<span class="trust-item">${i}</span><span class="dot mono">&bull;</span>`).join('');
+        track.innerHTML = set + set; // duplicated so translateX(-50%) loops seamlessly
     }
 
     function renderStats(stats) {
         const wrap = document.getElementById('statsRow');
         if (!wrap) return;
         wrap.innerHTML = stats.map(s => `
-            <div class="stat-cell reveal">
-                <span class="stat-value">${s.value}</span>
+            <div class="stat-cell stagger-item">
+                <span class="stat-value" data-raw="${s.value}">${s.value}</span>
                 <span class="stat-label">${s.label}</span>
             </div>`).join('');
     }
@@ -127,8 +129,8 @@
     function renderCards(selector, items, cardClass) {
         const el = document.querySelector(selector);
         if (!el) return;
-        el.innerHTML = items.map((item, i) => `
-            <div class="card ${cardClass} reveal delay-${(i % 3 + 1) * 100}">
+        el.innerHTML = items.map((item) => `
+            <div class="card ${cardClass} stagger-item">
                 <div class="icon-tile"><i data-lucide="${item.icon}"></i></div>
                 <h3>${item.title}</h3>
                 <p>${item.desc}</p>
@@ -139,7 +141,7 @@
         const el = document.getElementById('timeline');
         if (!el) return;
         el.innerHTML = steps.map(s => `
-            <div class="timeline-item reveal">
+            <div class="timeline-item stagger-item">
                 <div class="timeline-dot"></div>
                 <div class="card timeline-content">
                     <span class="step-num mono">${s.num}</span>
@@ -152,23 +154,26 @@
     function renderTeam(members) {
         const el = document.getElementById('teamGrid');
         if (!el) return;
-        el.innerHTML = members.map((m, i) => `
-            <div class="card team-card reveal delay-${(i % 3 + 1) * 100}">
-                <div class="avatar-circle">${initials(m.role)}</div>
+        el.innerHTML = members.map((m) => `
+            <div class="card team-card stagger-item">
+                <div class="avatar-circle">${initials(m.name)}</div>
                 <div class="role">${m.role}</div>
                 <div class="name">${m.name}</div>
             </div>`).join('');
     }
 
-    function initials(role) {
-        return role.replace(/[^\p{L}]/gu, '').slice(0, 2).toUpperCase();
+    function initials(name) {
+        const words = name.trim().split(/\s+/).filter(Boolean);
+        if (!words.length) return '?';
+        if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+        return (words[0][0] + words[1][0]).toUpperCase();
     }
 
     function renderEvents(items) {
         const el = document.getElementById('eventsGrid');
         if (!el) return;
-        el.innerHTML = items.map((e, i) => `
-            <div class="card event-card reveal delay-${(i % 3 + 1) * 100}">
+        el.innerHTML = items.map((e) => `
+            <div class="card event-card stagger-item">
                 <div class="eyebrow"><i data-lucide="${e.icon}" style="width:14px;height:14px"></i> ${e.status}</div>
                 <h3>${e.title}</h3>
                 <p>${e.desc}</p>
@@ -183,7 +188,7 @@
         const el = document.getElementById('faqWrapper');
         if (!el) return;
         el.innerHTML = items.map(item => `
-            <div class="faq-item">
+            <div class="faq-item stagger-item">
                 <button class="faq-question" type="button">
                     <span>${item.q}</span>
                     <svg class="faq-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
