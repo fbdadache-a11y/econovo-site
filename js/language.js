@@ -16,10 +16,11 @@
         const lang = stored || 'en';
         await setLanguage(lang, /*animate*/ false);
 
-        document.querySelectorAll('.js-lang-toggle').forEach(btn => btn.addEventListener('click', async () => {
+        const btn = document.getElementById('langBtn');
+        if (btn) btn.addEventListener('click', async () => {
             const current = document.documentElement.getAttribute('lang') || 'en';
             await setLanguage(current === 'en' ? 'ar' : 'en', true);
-        }));
+        });
     });
 
     async function loadContent(lang) {
@@ -43,9 +44,8 @@
         setMeta('og:title', content.meta.title, true);
         setMeta('og:description', content.meta.description, true);
 
-        document.querySelectorAll('.js-lang-toggle').forEach(langBtn => {
-            langBtn.textContent = lang === 'en' ? 'العربية' : 'English';
-        });
+        const langBtn = document.getElementById('langBtn');
+        if (langBtn) langBtn.textContent = lang === 'en' ? 'العربية' : 'English';
 
         const doRender = () => {
             renderStaticText(content);
@@ -143,7 +143,7 @@
         el.innerHTML = steps.map(s => `
             <div class="timeline-item stagger-item">
                 <div class="timeline-dot"></div>
-                <div class="card timeline-content">
+                <div class="card timeline-content" data-num="${s.num}">
                     <span class="step-num mono">${s.num}</span>
                     <h3 class="mb-16">${s.title}</h3>
                     <p>${s.desc}</p>
