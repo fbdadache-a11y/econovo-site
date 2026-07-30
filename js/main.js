@@ -78,36 +78,42 @@
         const overlay = document.getElementById('mobileMenuOverlay');
         if (!openBtn || !menu || !overlay) return;
 
-        const open = () => { menu.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; };
+        const links = menu.querySelectorAll('.nav-link');
+
+        const open = () => {
+            menu.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden';
+            if (window.gsap) {
+                gsap.fromTo(links, { opacity: 0, x: 16 }, { opacity: 1, x: 0, duration: .4, stagger: .06, delay: .15, ease: 'power2.out' });
+            }
+        };
         const close = () => { menu.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; };
 
         openBtn.addEventListener('click', open);
         closeBtn && closeBtn.addEventListener('click', close);
         overlay.addEventListener('click', close);
-        menu.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', close));
+        links.forEach(a => a.addEventListener('click', close));
     }
 
     function initThemeToggle() {
-        const btns = document.querySelectorAll('.js-theme-toggle');
+        const btn = document.getElementById('themeToggle');
         const root = document.documentElement;
         const stored = localStorage.getItem('econovo-theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const initial = stored || (prefersDark ? 'dark' : 'light');
         applyTheme(initial);
 
-        if (!btns.length) return;
-        btns.forEach(btn => btn.addEventListener('click', () => {
+        if (!btn) return;
+        btn.addEventListener('click', () => {
             const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             applyTheme(next);
             localStorage.setItem('econovo-theme', next);
-        }));
+        });
 
         function applyTheme(theme) {
             if (theme === 'dark') root.setAttribute('data-theme', 'dark');
             else root.removeAttribute('data-theme');
-            document.querySelectorAll('.js-theme-icon').forEach(icon => {
-                icon.setAttribute('data-lucide', theme === 'dark' ? 'sun' : 'moon');
-            });
+            const icon = document.getElementById('themeToggleIcon');
+            if (icon) icon.setAttribute('data-lucide', theme === 'dark' ? 'sun' : 'moon');
             if (window.lucide) window.lucide.createIcons();
             const meta = document.getElementById('themeColorMeta');
             if (meta) meta.setAttribute('content', theme === 'dark' ? '#1F1F1F' : '#F4F7F2');
